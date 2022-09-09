@@ -76,7 +76,7 @@
 
         const basePath = "Sphinx-GhPages-Versioning";
         const apiUrl = "https://api.github.com/repos/mgoulao/Sphinx-GhPages-Versioning/git/trees/gh-pages";
-        const versionRegex = new RegExp(/[vV]?\d+\.\d+(\.?\d+)*/g);
+        const versionRegex = new RegExp(/[vV]?\d+\.\d+(\.?\d+)*/);
         fetch(apiUrl).then(response => {
             if (response.status !== 200) {
                 console.warn("Unable to load repository tree, the repository must be public", response);
