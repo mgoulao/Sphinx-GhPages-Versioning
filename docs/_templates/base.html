@@ -12,7 +12,7 @@
     //     basePath = "";
     // }
     basePath = "Sphinx-GhPages-Versioning"
-    fetch(`${basePath}/_static/versioning_menu.html`).then(response => {
+    fetch(`/${basePath}/_static/versioning_menu.html`).then(response => {
         if (response.status === 200) {
             response.text().then(text => {
                 const container = document.createElement("div");
