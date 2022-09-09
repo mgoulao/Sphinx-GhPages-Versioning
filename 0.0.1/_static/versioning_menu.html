@@ -74,10 +74,13 @@
             }
         }
 
-        const basePath = "gym-docs";
-        const apiUrl = "https://api.github.com/repos/mgoulao/gym-docs/git/trees/gh-pages";
-        const versionRegex = new RegExp(/[vV]?\d+\.\d+(\.?\d+)*/g);
+        const basePath = "Sphinx-GhPages-Versioning";
+        const apiUrl = "https://api.github.com/repos/mgoulao/Sphinx-GhPages-Versioning/git/trees/gh-pages";
+        const versionRegex = new RegExp(/[vV]?\d+\.\d+(\.?\d+)*/);
         fetch(apiUrl).then(response => {
+            if (response.status !== 200) {
+                console.warn("Unable to load repository tree, the repository must be public", response);
+            }
             response.json().then(json => {
                 const versions = json.tree.filter(v => versionRegex.test(v.path)).map(v => v.path);
                 versions.reverse();
@@ -89,7 +92,7 @@
                     const aElem = document.createElement("a");
                     aElem.textContent = version
                     
-                    // https://domain.com/user/v1.2.0/content/index.html -> /v1.2.0/content/index.html
+                    // https://domain.com/basePath/1.2.0/content/index.html -> /1.2.0/content/index.html
                     let currentPath = document.location.href.split(document.location.origin)[1];
                     if (basePath !== "") {
                         currentPath = currentPath.split(basePath).slice(1).join("/");

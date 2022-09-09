@@ -200,7 +200,7 @@
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Version<span class="colon">:</span></dt>
-<dd class="field-odd"><p>0.0.1</p>
+<dd class="field-odd"><p>0.0.2</p>
 </dd>
 </dl>
 </section>
@@ -256,13 +256,7 @@
 
 <script>
 (() => {
-    // basePath = "#";
-    // if (basePath.slice(-1) === "/") {
-    //     basePath = basePath.slice(0,-1);
-    // } else if (basePath[0] === "#") {
-    //     basePath = "";
-    // }
-    basePath = "Sphinx-GhPages-Versioning"
+    basePath = "/Sphinx-GhPages-Versioning"
     fetch(`${basePath}/_static/versioning_menu.html`).then(response => {
         if (response.status === 200) {
             response.text().then(text => {
