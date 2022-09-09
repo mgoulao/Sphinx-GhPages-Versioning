@@ -22,6 +22,9 @@ jobs:
 
       - name: Install Library
         run: pip install -e .
+
+      - name: Install dependencies
+        run: pip install -r ./docs/requirements.txt
       
       - name: Build
         run: sphinx-build -b dirhtml -v docs _build
