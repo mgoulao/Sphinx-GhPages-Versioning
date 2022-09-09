@@ -3,16 +3,15 @@ on:
   push:
     tags: 
       - 'v?*.*.*'
-
+permissions:
+  contents: write
 jobs:
   docs:
     name: Generate Website for new version
     runs-on: ubuntu-latest
-    env:
-      SPHINX_GITHUB_CHANGELOG_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
 
       - name: Get tag
         id: tag
@@ -33,8 +32,8 @@ jobs:
         run: rm -f ./_build/CNAME 
 
       - name: Upload to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_build
-          destination_dir: ${{steps.tag.outputs.tag}}
+          folder: _build
+          target-folder: ${{steps.tag.outputs.tag}}
+          clean: false

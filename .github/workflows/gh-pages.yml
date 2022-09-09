@@ -2,40 +2,17 @@ name: Deploy
 on:
   push:
     branches: [main]
-
+permissions:
+  contents: write
 jobs:
-  cleaning:
-      name: Clean gh-pages
-      runs-on: ubuntu-latest
-
-      steps:
-        - uses: actions/checkout@v2
-          with:
-            ref: gh-pages
-
-        - name: Remove non-version directories
-          run: find . -maxdepth 1 -type d ! -regex "\(\.\/v?[0-9]+.[0-9]+.[0-9]+\)\|\." -exec rm -rv {} +
-
-        - name: Remove files
-          run: find . -maxdepth 1 -type f -delete
-        
-        - name: Upload to GitHub Pages
-          uses: peaceiris/actions-gh-pages@v3
-          with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: .
-
   docs:
     name: Generate Website
     needs: cleaning
     runs-on: ubuntu-latest
-    env:
-      SPHINX_GITHUB_CHANGELOG_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
 
       - name: Install dependencies
         run: pip install -e . && pip install -r ./docs/requirements.txt
@@ -47,8 +24,8 @@ jobs:
         run: rm -r ./_build/.doctrees
 
       - name: Upload to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_build
-          keep_files: true
+          folder: _build
+          clean-exclude: |
+            *.*.*/
