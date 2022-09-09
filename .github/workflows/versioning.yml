@@ -30,7 +30,7 @@ jobs:
         run: sphinx-build -b dirhtml -v docs _build
 
       - name: Remove CNAME
-        run: rm -r ./_build/CNAME 
+        run: rm -f ./_build/CNAME 
 
       - name: Upload to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
