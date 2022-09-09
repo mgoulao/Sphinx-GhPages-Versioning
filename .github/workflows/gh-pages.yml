@@ -14,7 +14,7 @@ jobs:
             ref: gh-pages
 
         - name: Remove non-version directories
-          run: find . -maxdepth 1 -type d ! -regex "\(\.\/v?[0-9]+.[0-9]+.[0-9]+\)\|\." -delete
+          run: find . -maxdepth 1 -type d ! -regex "\(\.\/v?[0-9]+.[0-9]+.[0-9]+\)\|\." -exec rm -rv {} +
 
         - name: Remove files
           run: find . -maxdepth 1 -type f -delete
