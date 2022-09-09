@@ -74,8 +74,8 @@
             }
         }
 
-        const basePath = "gym-docs";
-        const apiUrl = "https://api.github.com/repos/mgoulao/gym-docs/git/trees/gh-pages";
+        const basePath = "Sphinx-GhPages-Versioning";
+        const apiUrl = "https://api.github.com/repos/mgoulao/Sphinx-GhPages-Versioning/git/trees/gh-pages";
         const versionRegex = new RegExp(/[vV]?\d+\.\d+(\.?\d+)*/g);
         fetch(apiUrl).then(response => {
             response.json().then(json => {
@@ -89,7 +89,7 @@
                     const aElem = document.createElement("a");
                     aElem.textContent = version
                     
-                    // https://domain.com/user/v1.2.0/content/index.html -> /v1.2.0/content/index.html
+                    // https://domain.com/user/1.2.0/content/index.html -> /1.2.0/content/index.html
                     let currentPath = document.location.href.split(document.location.origin)[1];
                     if (basePath !== "") {
                         currentPath = currentPath.split(basePath).slice(1).join("/");
