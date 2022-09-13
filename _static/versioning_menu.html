@@ -75,6 +75,7 @@
         }
 
         const basePath = "Sphinx-GhPages-Versioning";
+        const mainBranchName = "main"
         const apiUrl = "https://api.github.com/repos/mgoulao/Sphinx-GhPages-Versioning/git/trees/gh-pages";
         const versionRegex = new RegExp(/[vV]?\d+\.\d+(\.?\d+)*/);
         fetch(apiUrl).then(response => {
@@ -85,7 +86,7 @@
             response.json().then(json => {
                 const versions = json.tree.filter(v => versionRegex.test(v.path)).map(v => v.path);
                 versions.reverse();
-                versions.unshift("master");
+                versions.unshift(mainBranchName);
                 const list_elems = [];
                 const versions_list_elem = document.querySelector(".versions_menu__list");
                 for (const version of versions) {
@@ -103,7 +104,7 @@
                         currentPath = "/" + currentPath.split("/").slice(2).join("/")
                     }
 
-                    aElem.href = version === "master" ? 
+                    aElem.href = version === mainBranchName ? 
                                             `/${basePath}${currentPath}` : 
                                             `/${basePath}/${version}${currentPath}`;
                     liElem.appendChild(aElem);
