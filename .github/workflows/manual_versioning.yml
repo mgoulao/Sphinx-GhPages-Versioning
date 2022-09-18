@@ -6,7 +6,7 @@ on:
           description: 'Documentation version to create'
           required: true
       commit:
-          description: 'Commit used to build the version Documentation'
+          description: 'Commit used to build the Documentation version'
           required: false
 
 permissions:
