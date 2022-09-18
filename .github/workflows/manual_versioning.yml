@@ -16,11 +16,6 @@ jobs:
     name: Generate Website for new version
     runs-on: ubuntu-latest
     steps:
-      - run: |
-            echo "Version: ${{ github.event.inputs.version }}"
-            echo "Version: ${{ inputs.version }}"
-            echo "commit: $COMMIT"
-
       - uses: actions/checkout@v3
         if: inputs.commit == ''
 
@@ -52,5 +47,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _build
-          target-folder: ${{ inputs.tag }}
+          target-folder: ${{ inputs.version }}
           clean: false
