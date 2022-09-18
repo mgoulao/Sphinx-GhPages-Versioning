@@ -1,4 +1,4 @@
-name: Versioning
+name: Manual Versioning
 on:
   workflow_dispatch:
     inputs:
@@ -16,6 +16,9 @@ jobs:
     name: Generate Website for new version
     runs-on: ubuntu-latest
     steps:
+      - run: |
+            echo "Version: $VERSION"
+            echo "commit: $COMMIT"
       - uses: actions/checkout@v3
         if: inputs.commit == ''
 
