@@ -17,11 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-            echo "Version: $VERSION"
+            echo "Version: ${{ github.event.inputs.version }}"
+            echo "Version: ${{ inputs.version }}"
             echo "commit: $COMMIT"
-        env:
-            VERSION: ${{ inputs.version }}
-            COMMIT: ${{ inputs.commit }}
 
       - uses: actions/checkout@v3
         if: inputs.commit == ''
