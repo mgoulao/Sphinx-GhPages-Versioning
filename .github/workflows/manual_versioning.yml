@@ -8,6 +8,9 @@ on:
       commit:
           description: 'Commit used to build the Documentation version'
           required: false
+      latest:
+          description: 'Latest version'
+          type: bool
 
 permissions:
   contents: write
@@ -49,3 +52,11 @@ jobs:
           folder: _build
           target-folder: ${{ inputs.version }}
           clean: false
+
+      - name: Upload to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        if: inputs.latest
+        with:
+          folder: _build
+          clean-exclude: |
+            *.*.*/

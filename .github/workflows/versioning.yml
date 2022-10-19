@@ -1,7 +1,7 @@
 name: Versioning
 on:
   push:
-    tags: 
+    tags:
       - 'v?*.*.*'
 permissions:
   contents: write
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - uses: actions/setup-python@v4
         with:
             python-version: '3.9'
@@ -27,12 +27,12 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r ./docs/requirements.txt
-      
+
       - name: Build
         run: sphinx-build -b dirhtml -v docs _build
 
       - name: Remove CNAME
-        run: rm -f ./_build/CNAME 
+        run: rm -f ./_build/CNAME
 
       - name: Remove .doctrees
         run: rm -r _build/.doctrees
@@ -43,3 +43,10 @@ jobs:
           folder: _build
           target-folder: ${{steps.tag.outputs.tag}}
           clean: false
+
+      - name: Upload to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: _build
+          clean-exclude: |
+            *.*.*/
