@@ -10,7 +10,7 @@ on:
           required: false
       latest:
           description: 'Latest version'
-          type: bool
+          type: boolean
 
 permissions:
   contents: write
