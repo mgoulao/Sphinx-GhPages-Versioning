@@ -94,7 +94,7 @@
                 for (const version of versions) {
                     const liElem = document.createElement("li");
                     const aElem = document.createElement("a");
-                    aElem.textContent = version
+                    aElem.textContent = version === mainBranchName ? version + " (unstable)" : version
 
                     // https://domain.com/basePath/1.2.0/content/index.html -> /1.2.0/content/index.html
                     let currentPath = document.location.href.split(document.location.origin)[1];
@@ -102,7 +102,7 @@
                         currentPath = currentPath.split(basePath).slice(1).join("/");
                     }
                     // /v1.2.0/content/index.html -> /content/index.html
-                    if (versionRegex.test(currentPath.split("/")[1])) {
+                    if (versionRegex.test(currentPath.split("/")[1]) || currentPath.split("/")[1] === mainBranchName) {
                         currentPath = "/" + currentPath.split("/").slice(2).join("/")
                     }
 
